@@ -1,7 +1,87 @@
-/**
- * Implement Gatsby's Node APIs in this file.
- *
- * See: https://www.gatsbyjs.org/docs/node-apis/
- */
+const path = require(`path`)
+const util = require('util')
 
-// You can delete this file if you're not using it
+exports.createPages = async({ graphql, actions }) => {
+  const { createPage } = actions
+  const result = await graphql(`
+  {
+    allNodeArticle(sort: {fields: created, order: DESC}) {
+      edges {
+        node {
+          title
+          created
+          drupal_internal__nid
+          id
+          body {
+            value
+          }
+          path {
+            alias
+          }
+        }
+      }
+    }
+  }
+  `)
+  result.data.allNodeArticle.edges.forEach(({ node }) => {
+    let pagePath = node.path.alias
+    if (!pagePath) {
+      pagePath = '/node/' + node.drupal_internal__nid
+    }
+    createPage({
+      path: pagePath,
+      component: path.resolve(`./src/components/blog-post.js`),
+      context: {
+        id: node.id,
+      },
+    })
+  })
+  const termResult = await graphql(`
+  {
+    allTaxonomyTermTags {
+      edges {
+        node {
+          id
+          name
+          drupal_internal__tid
+        }
+      }
+    }
+  }
+  
+  `)
+  termResult.data.allTaxonomyTermTags.edges.forEach(({ node }) => {
+    let pagePath = util.format('/taxonomy/term/%d', node.drupal_internal__tid)
+    createPage({
+      path: pagePath,
+      component: path.resolve(`./src/components/term-list.js`),
+      context: {
+        id: node.id,
+      },
+    })
+  })
+}  
+
+exports.onCreateWebpackConfig = ({
+  stage,
+  rules,
+  loaders,
+  plugins,
+  actions,
+}) => {
+  actions.setWebpackConfig({
+    module: {
+      rules: [
+        {
+          test: /\.css$/,
+          exclude: /node_modules/,
+          use: [
+            {
+              loader: 'postcss-loader'
+            }
+          ]
+        }
+      ]
+    }
+  })
+}
