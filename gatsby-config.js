@@ -32,7 +32,7 @@ module.exports = {
     {
       resolve: `gatsby-source-drupal`,
       options: {
-        baseUrl: `http://orkjern.localhost/`,
+        baseUrl: `https://orkjern.com/`,
       },
     },
   ],
