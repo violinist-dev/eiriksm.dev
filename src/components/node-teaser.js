@@ -9,13 +9,13 @@ function Teaser({ node }) {
   }
   let date = new Date(node.created * 1000).toISOString()
   return (
-    <article className="node node--view-mode-teaser clearfix" about="/aa-cc" typeof="schema:Article">
+    <article className="node node--view-mode-teaser pb-8 clearfix" about="/aa-cc" typeof="schema:Article">
+        <div className="node__meta text-sm text-gray-600 py-1">Post date: {date}</div>
         <h2 className="node__title ">
             <Link to={ pagePath }>{ node.title }</Link>
         </h2>
-        <div className="node__meta">Post date: {date}</div>
-        <div className="read-more">
-        <Link to={ pagePath }>Read more</Link>
+        <div className="read-more uppercase">
+        <Link className="no-underline text-base font-bold" to={ pagePath }>Read more</Link>
         </div>
         <div className="comment-count"><a data-disqus-identifier={pagePath} href={pagePath}></a></div>
         <Tags tags={node.relationships.field_tags}></Tags>

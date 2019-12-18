@@ -1,9 +1,20 @@
-const defaultTheme = require("tailwindcss/defaultTheme");
+const { colors } = require('tailwindcss/defaultTheme')
 
 module.exports = {
   theme: { 
     container: {
       center: true,
+    },
+    fontFamily: {
+      sans: '-apple-system,BlinkMacSystemFont,"Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue",sans-serif',
+      mono: [
+        'Menlo',
+        'Monaco',
+        'Consolas',
+        '"Liberation Mono"',
+        '"Courier New"',
+        'monospace',
+      ]
     },
     screens: {
       'sm': '640px',

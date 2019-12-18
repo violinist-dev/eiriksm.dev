@@ -7,7 +7,7 @@ function Tags({ tags }) {
       let path = util.format('/taxonomy/term/%d', tag.drupal_internal__tid)
       return (
           <li key={tag.id}>
-              <Link to={path}>
+              <Link className="mr-4" to={path}>
               {tag.name}
               </Link>
           </li>
@@ -15,7 +15,6 @@ function Tags({ tags }) {
   })
   return (
         <div className="clearfix field-type-taxonomy-term-reference">
-            <h3>Tags: </h3>
             <ul className="links field-items">
                 {tagList}
             </ul>
