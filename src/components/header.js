@@ -4,7 +4,7 @@ import React from "react"
 
 const Header = ({ siteTitle }) => (
   <header className="pb-4">
-    <div className="container">
+    <div className="container px-4">
       <h1>
         <Link className="text-gray-600 font-mono"
           to="/"
