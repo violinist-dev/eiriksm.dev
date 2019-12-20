@@ -1,16 +1,17 @@
 import React from "react"
 import Tags from "./tags"
 import { Link } from "gatsby"
+import blogFormat from '../date'
 
 function Teaser({ node }) {
   let pagePath = node.path.alias
   if (!pagePath) {
     pagePath = '/node/' + node.drupal_internal__nid
   }
-  let date = new Date(node.created * 1000).toISOString()
+  let date = blogFormat(new Date(node.created * 1000))
   return (
     <article className="node node--view-mode-teaser pb-8 clearfix" about="/aa-cc" typeof="schema:Article">
-        <div className="node__meta text-sm text-gray-600 py-1">Post date: {date}</div>
+        <div className="node__meta text-sm text-gray-700 py-1">{date}</div>
         <h2 className="node__title ">
             <Link to={ pagePath }>{ node.title }</Link>
         </h2>

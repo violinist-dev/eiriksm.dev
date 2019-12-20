@@ -14,9 +14,11 @@ a {
 }
 body {
   @apply .font-sans;
-  font-size: 21px;
   line-height: 1.66;
   letter-spacing: -0.084px;
+}
+html {
+  font-size: 19px;
 }
 .node__title a {
   color: theme('colors.gray.800');
@@ -36,8 +38,11 @@ body {
   @apply .inline-block;
   text-rendering: optimizeLegibility;
 }
+a {
+  @apply .text-blue-800;
+}
 .field-type-taxonomy-term-reference li a {
-  @apply .text-base .text-sm .text-teal-500 .no-underline;
+  @apply .text-base .text-sm .text-teal-700 .no-underline;
   display: block;
 }
 blockquote {

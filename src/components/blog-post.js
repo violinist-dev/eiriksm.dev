@@ -1,6 +1,7 @@
 import React from "react"
 import { graphql } from "gatsby"
 import Layout from "../components/layout"
+import blogFormat from "../date"
 
 export default ({ data }) => {
   const post = data.nodeArticle
@@ -12,7 +13,7 @@ export default ({ data }) => {
     <Layout>
       <article>
         <h1>{ post.title }</h1>
-        <small><em>{ Date(post.created) }</em></small>
+        <small className="blog-date text-gray-700 py-1">{ blogFormat(new Date(post.created * 1000)) }</small>
         <div className="article-body" dangerouslySetInnerHTML={{ __html: post.body.value }}></div>
         {img}
       </article>
