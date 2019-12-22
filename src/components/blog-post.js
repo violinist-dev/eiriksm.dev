@@ -1,9 +1,15 @@
 import React from "react"
+import { useEffect } from "react"
 import { graphql } from "gatsby"
 import Layout from "../components/layout"
 import blogFormat from "../date"
+import Prism from "prismjs"
 
 export default ({ data }) => {
+  useEffect(() => {
+    // call the highlightAll() function to style our code blocks
+    Prism.highlightAll()
+  })
   const post = data.nodeArticle
   let img;
   if (post.relationships.field_image) {
