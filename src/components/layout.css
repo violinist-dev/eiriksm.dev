@@ -52,6 +52,9 @@ blockquote {
 .article-body blockquote p {
   margin-top: 0px;
 }
+#gatsby-noscript {
+  display: none;
+}
 
 @tailwind components;
 

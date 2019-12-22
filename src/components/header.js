@@ -2,8 +2,10 @@ import { Link } from "gatsby"
 import PropTypes from "prop-types"
 import React from "react"
 
-const Header = ({ siteTitle }) => (
-  <header className="pb-4">
+const Header = ({ siteTitle }) => {
+  const fix = `<style>#gatsby-noscript { display: none; }</style>`
+  return (
+    <header className="pb-4">
     <div className="container px-4">
       <h1>
         <Link className="text-gray-700 text-lg font-mono"
@@ -14,7 +16,8 @@ const Header = ({ siteTitle }) => (
       </h1>
     </div>
   </header>
-)
+  )
+}
 
 Header.propTypes = {
   siteTitle: PropTypes.string,
