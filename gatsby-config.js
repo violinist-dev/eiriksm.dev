@@ -76,8 +76,9 @@ module.exports = {
                   pagePath = '/node/' + edge.node.drupal_internal__nid
                 }
                 return Object.assign({}, {
+                  title: edge.node.title,
                   description: edge.node.excerpt,
-                  date: edge.node.created,
+                  date: new Date(edge.node.created * 1000),
                   url: site.siteMetadata.siteUrl + pagePath,
                   guid: site.siteMetadata.siteUrl + pagePath,
                   custom_elements: [{ "content:encoded": edge.node.body.value }],
