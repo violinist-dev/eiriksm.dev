@@ -3,7 +3,6 @@ import PropTypes from "prop-types"
 import React from "react"
 
 const Header = ({ siteTitle }) => {
-  const fix = `<style>#gatsby-noscript { display: none; }</style>`
   return (
     <header className="pb-4">
     <div className="container px-4">
