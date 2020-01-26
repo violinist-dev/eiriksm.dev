@@ -1,35 +1,55 @@
 import React from "react"
-import { useEffect } from "react"
 import { graphql } from "gatsby"
 import Layout from "../components/layout"
+import SEO from "../components/seo"
 import blogFormat from "../date"
 import Prism from "prismjs"
 
-export default ({ data }) => {
-  useEffect(() => {
+export default class BlogPost extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showImage: window === `undefined`
+    }
+  }
+  componentDidMount() {
     // call the highlightAll() function to style our code blocks
     Prism.highlightAll()
-  })
-  const post = data.nodeArticle
-  let img;
-  if (post.relationships.field_image) {
-      img = (<img alt={post.title} className="blog-illustration" src={ post.relationships.field_image.localFile.publicURL } />)
   }
-  let serverRendered = (<span data-property="is-server-rendered"></span>)
-  if (typeof window !== `undefined`) {
-    serverRendered = '';
+  handleImageClick() {
+    this.setState({showImage: true})
   }
-  return (
-    <Layout>
-      <article>
-        {serverRendered}
-        <h1 id="page-title">{ post.title }</h1>
-        <small className="blog-date text-gray-700 py-1">{ blogFormat(new Date(post.created * 1000)) }</small>
-        <div className="article-body" dangerouslySetInnerHTML={{ __html: post.body.value }}></div>
-        {img}
-      </article>
-    </Layout>
-  )
+  render()  {
+    let data = this.props.data
+    const post = data.nodeArticle
+    let img;
+    if (post.relationships.field_image) {
+      img = (
+        <div className="img player"  onClick={this.handleImageClick.bind(this)}>
+          <div className="text">Play</div>
+        </div>
+      )
+      if (this.state.showImage) {
+        img = (<img alt={post.title} className="blog-illustration" src={ post.relationships.field_image.localFile.publicURL} />)
+      }
+    }
+    let serverRendered = (<span data-property="is-server-rendered"></span>)
+    if (typeof window !== `undefined`) {
+      serverRendered = '';
+    }
+    return (
+      <Layout>
+        <article className="full">
+          <SEO title={post.title} />
+          {serverRendered}
+          <h1 id="page-title">{ post.title }</h1>
+          <small className="blog-date text-gray-700 py-1">{ blogFormat(new Date(post.created * 1000)) }</small>
+          <div className="article-body" dangerouslySetInnerHTML={{ __html: post.body.value }}></div>
+          {img}
+        </article>
+      </Layout>
+    )
+  }
 }
 
 export const query = graphql`
