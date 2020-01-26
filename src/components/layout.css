@@ -26,8 +26,7 @@ html {
   @apply .no-underline;
 }
 .article-body p {
-  margin-bottom: -9.66667px;
-  margin-top: 42px;
+  margin-bottom: 42px;
 }
 .blog-illustration {
   margin: auto;
@@ -54,6 +53,30 @@ blockquote {
 }
 #gatsby-noscript {
   display: none;
+}
+blockquote {
+  @apply .border-gray-600;
+  border-left: 1px solid;
+}
+article.full .blog-date {
+  margin-bottom: 1em;
+  display: block;
+}
+article.full h2 {
+  margin-top: 42px;
+}
+article .img.player {
+  background-color: theme('colors.teal.800');
+  height: 100px;
+  width: 60%;
+  margin: auto;
+}
+
+article .img.player .text {
+  color: white;
+  text-align: center;
+  padding: 2em;
+  cursor: pointer;
 }
 
 @tailwind components;

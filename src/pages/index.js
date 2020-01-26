@@ -43,7 +43,7 @@ const IndexPage = () => {
 
   return (
     <Layout>
-      <SEO title="Home" />{blogs}
+      <SEO title="eiriksm.dev" />{blogs}
     </Layout>
   )
 }
