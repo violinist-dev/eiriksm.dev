@@ -23,7 +23,6 @@ function Teaser({ node }) {
         <div className="read-more uppercase">
         <Link className="no-underline text-base font-bold" to={ pagePath }>Read more</Link>
         </div>
-        <div className="comment-count"><a data-disqus-identifier={pagePath} href={pagePath}></a></div>
         <Tags tags={node.relationships.field_tags}></Tags>
     </article>
   )

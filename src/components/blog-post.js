@@ -4,6 +4,7 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 import blogFormat from "../date"
 import Prism from "prismjs"
+import { DiscussionEmbed } from "disqus-react"
 
 export default class BlogPost extends React.Component {
   constructor(props) {
@@ -22,6 +23,14 @@ export default class BlogPost extends React.Component {
   render()  {
     let data = this.props.data
     const post = data.nodeArticle
+    let url = post.path.alias
+    if (!url) {
+      url = '/node/' + post.drupal_internal__nid
+    }
+    const disqusConfig = {
+      shortname: 'orkjblog',
+      config: { url, title: null, identifier: url },
+    }
     let img;
     if (post.relationships.field_image && post.relationships.field_image.localFile) {
       img = (
@@ -47,6 +56,7 @@ export default class BlogPost extends React.Component {
           <div className="article-body" dangerouslySetInnerHTML={{ __html: post.body.value }}></div>
           {img}
         </article>
+        <DiscussionEmbed shortname="orkjblog" config={disqusConfig.config} />
       </Layout>
     )
   }
@@ -58,6 +68,9 @@ export const query = graphql`
       title
       body {
         value
+      }
+      path {
+        alias
       }
       created
       relationships {
