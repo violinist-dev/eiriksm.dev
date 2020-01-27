@@ -28,7 +28,7 @@ export default class BlogPost extends React.Component {
       url = '/node/' + post.drupal_internal__nid
     }
     const disqusConfig = {
-      shortname: 'orkjblog',
+      shortname: process.env.GATSBY_DISQUS_NAME,
       config: { url, title: null, identifier: url },
     }
     let img;
