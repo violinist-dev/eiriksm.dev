@@ -3,5 +3,5 @@
 set -eu
 
 npm i
-npm deploy
+npm run deploy
 aws cloudfront create-invalidation --distribution-id $DIST_ID --paths '/*'
