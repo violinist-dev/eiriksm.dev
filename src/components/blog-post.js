@@ -9,7 +9,7 @@ export default class BlogPost extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      showImage: window === `undefined`
+      showImage: (typeof window === `undefined`)
     }
   }
   componentDidMount() {
@@ -23,7 +23,7 @@ export default class BlogPost extends React.Component {
     let data = this.props.data
     const post = data.nodeArticle
     let img;
-    if (post.relationships.field_image) {
+    if (post.relationships.field_image && post.relationships.field_image.localFile) {
       img = (
         <div className="img player"  onClick={this.handleImageClick.bind(this)}>
           <div className="text">Play</div>
