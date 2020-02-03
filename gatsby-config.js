@@ -120,7 +120,8 @@ module.exports = {
             }
             `,
             output: "/planet",
-            title: "eiriksm.dev Planet Drupal feed"
+            title: "eiriksm.dev Planet Drupal feed",
+            site_url: "https://eiriksm.dev/planet",
           },
         ],
       },
