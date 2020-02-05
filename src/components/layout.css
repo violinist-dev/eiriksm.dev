@@ -26,7 +26,7 @@ html {
   @apply .no-underline;
 }
 .article-body p {
-  margin-bottom: 42px;
+  margin-bottom: 18px;
 }
 .blog-illustration {
   margin: auto;
