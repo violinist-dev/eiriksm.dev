@@ -37,7 +37,7 @@ module.exports = {
     {
       resolve: `gatsby-source-drupal`,
       options: {
-        baseUrl: `http://api.orkjern.com/`,
+        baseUrl: process.env.API_URL
       },
     },
     {
