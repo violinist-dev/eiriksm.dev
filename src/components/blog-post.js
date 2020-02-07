@@ -27,9 +27,14 @@ export default class BlogPost extends React.Component {
     if (!url) {
       url = '/node/' + post.drupal_internal__nid
     }
+    const disqusUrl = 'https://eiriksm.dev' + url;
     const disqusConfig = {
       shortname: process.env.GATSBY_DISQUS_NAME,
-      config: { url, title: null, identifier: url },
+      config: {
+        url: disqusUrl,
+        title: null,
+        identifier: url
+      },
     }
     let img;
     if (post.relationships.field_image && post.relationships.field_image.localFile) {
