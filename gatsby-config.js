@@ -33,11 +33,10 @@ module.exports = {
         icon: `src/images/d8.png`,
       },
     },
-    `gatsby-plugin-offline`,
     {
       resolve: `gatsby-source-drupal`,
       options: {
-        baseUrl: `http://api.orkjern.com/`,
+        baseUrl: process.env.API_URL
       },
     },
     {
@@ -120,7 +119,8 @@ module.exports = {
             }
             `,
             output: "/planet",
-            title: "eiriksm.dev Planet Drupal feed"
+            title: "eiriksm.dev Planet Drupal feed",
+            site_url: "https://eiriksm.dev/planet",
           },
         ],
       },
