@@ -19,6 +19,7 @@ function SEO({ description, lang, meta, title }) {
             title
             description
             author
+            siteUrl
           }
         }
       }
@@ -62,6 +63,10 @@ function SEO({ description, lang, meta, title }) {
         {
           name: `twitter:title`,
           content: title,
+        },
+        {
+          name: `og:image`,
+          content: site.siteMetadata.siteUrl + '/sites/default/files/eiriksm.png',
         },
         {
           name: `twitter:description`,
