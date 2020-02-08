@@ -80,6 +80,18 @@ article.full ul {
   @apply .list-disc;
   padding-left: 2em;
 }
+.social-links a {
+  margin: .3em;
+  display: inline-block;
+}
+.social-links,
+footer .eirik {
+  text-align: center;
+}
+.social-links svg {
+  display: inline-block;
+  max-width: 30px;
+}
 
 @tailwind components;
 
