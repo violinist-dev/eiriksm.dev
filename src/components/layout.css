@@ -25,6 +25,7 @@ html {
   @apply .font-extrabold;
   @apply .no-underline;
 }
+ul,
 .article-body p {
   margin-bottom: 18px;
 }
@@ -51,9 +52,6 @@ blockquote {
 .article-body blockquote p {
   margin-top: 0px;
 }
-#gatsby-noscript {
-  display: none;
-}
 blockquote {
   @apply .border-gray-600;
   border-left: 1px solid;
@@ -77,6 +75,10 @@ article .img.player .text {
   text-align: center;
   padding: 2em;
   cursor: pointer;
+}
+article.full ul {
+  @apply .list-disc;
+  padding-left: 2em;
 }
 
 @tailwind components;

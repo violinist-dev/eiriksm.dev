@@ -22,9 +22,15 @@ const Layout = ({ children }) => {
       }
     }
   `)
+  let thisstyle = `#gatsby-noscript {
+    display: none;
+  }`
 
   return (
     <>
+      <style>
+        {thisstyle}
+      </style>
       <Header siteTitle={data.site.siteMetadata.title} />
       <div className="container px-4">
         <main>{children}</main>
