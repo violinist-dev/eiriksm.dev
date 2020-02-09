@@ -3,6 +3,9 @@ import formatDistance from 'date-fns/formatDistance'
 import util from 'util'
 
 function blogFormat(date) {
+    if (date > Date.now()) {
+        date = Date.now()
+    }
     var dateFormatted = format(date, 'eeee, LLL qo u')
     var distanceFormmated = formatDistance(date, new Date(), {
         addSuffix: true
