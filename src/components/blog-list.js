@@ -50,6 +50,7 @@ export const query = graphql`
         edges {
           node {
             title
+            drupal_internal__nid
             id
             path {
               alias
