@@ -20,7 +20,7 @@ export default ({ data, pageContext }) => {
   })
   return (
     <Layout>
-      <SEO title="eiriksm.dev" />
+      <SEO title="Blog" />
       <div>
         {list}
       </div>
