@@ -2,9 +2,15 @@ import React from "react"
 import { graphql } from "gatsby"
 import Layout from "./layout"
 import Teaser from "./node-teaser"
+import { Link } from 'gatsby'
 
-export default ({ data }) => {
+export default ({ data, pageContext }) => {
   const posts = data.allNodeArticle.edges
+  const { currentPage, numPages } = pageContext
+  const isFirst = currentPage === 1
+  const isLast = currentPage === numPages
+  const prevPage = currentPage - 1 === 1 ? "/" : '/blog/' + (currentPage - 1).toString()
+  const nextPage = '/blog/' + (currentPage + 1).toString()
 
   const list = posts.map((item) => {
       return (
@@ -15,6 +21,18 @@ export default ({ data }) => {
     <Layout>
       <div>
         {list}
+      </div>
+      <div className="blog-pager">
+      {!isFirst && (
+        <Link to={prevPage} rel="prev">
+          ← Previous Page
+        </Link>
+      )}
+      {!isLast && (
+        <Link to={nextPage} rel="next">
+          Next Page →
+        </Link>
+      )}
       </div>
     </Layout>
   )

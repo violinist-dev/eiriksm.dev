@@ -92,6 +92,16 @@ footer .eirik {
   display: inline-block;
   max-width: 30px;
 }
+.blog-pager {
+  display: table;
+  width: 100%;
+}
+.blog-pager a {
+  display: table-cell;
+}
+.blog-pager a[rel="next"] {
+  text-align: right;
+}
 
 @tailwind components;
 
