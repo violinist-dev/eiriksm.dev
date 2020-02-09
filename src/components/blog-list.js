@@ -2,6 +2,7 @@ import React from "react"
 import { graphql } from "gatsby"
 import Layout from "./layout"
 import Teaser from "./node-teaser"
+import SEO from "../components/seo"
 import { Link } from 'gatsby'
 
 export default ({ data, pageContext }) => {
@@ -19,6 +20,7 @@ export default ({ data, pageContext }) => {
   })
   return (
     <Layout>
+      <SEO title="eiriksm.dev" />
       <div>
         {list}
       </div>
