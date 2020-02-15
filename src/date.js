@@ -6,7 +6,7 @@ function blogFormat(date) {
     if (date > Date.now()) {
         date = Date.now()
     }
-    var dateFormatted = format(date, 'eeee, LLL qo u')
+    var dateFormatted = format(date, 'eeee, LLL do u')
     var distanceFormmated = formatDistance(date, new Date(), {
         addSuffix: true
     })
