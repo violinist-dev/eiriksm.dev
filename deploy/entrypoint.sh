@@ -2,7 +2,7 @@
 
 set -eu
 
-wget $DISQUS_XML_URL -O /disqus.xml
+wget $DISQUS_XML_URL -O disqus.xml
 
 npm i
 npm run build
