@@ -1,5 +1,6 @@
 const path = require(`path`)
 const util = require('util')
+const fetch = require('node-fetch')
 
 exports.createPages = async({ graphql, actions }) => {
   const { createPage } = actions
@@ -10,6 +11,7 @@ exports.createPages = async({ graphql, actions }) => {
         node {
           title
           created
+          drupal_id
           drupal_internal__nid
           id
           body {
@@ -48,6 +50,7 @@ exports.createPages = async({ graphql, actions }) => {
       component: path.resolve(`./src/components/blog-post.js`),
       context: {
         id: node.id,
+        drupal_id: node.drupal_id
       },
     })
   })
@@ -63,7 +66,7 @@ exports.createPages = async({ graphql, actions }) => {
       }
     }
   }
-  
+
   `)
   termResult.data.allTaxonomyTermTags.edges.forEach(({ node }) => {
     let pagePath = util.format('/taxonomy/term/%d', node.drupal_internal__tid)
@@ -75,7 +78,7 @@ exports.createPages = async({ graphql, actions }) => {
       },
     })
   })
-}  
+}
 
 exports.onCreateWebpackConfig = ({
   stage,
@@ -99,4 +102,51 @@ exports.onCreateWebpackConfig = ({
       ]
     }
   })
+}
+
+exports.sourceNodes = async({ actions, createNodeId, createContentDigest }) => {
+  const { createNode } = actions
+  try {
+    const login = process.env.BASIC_AUTH_USERNAME
+    const password = process.env.BASIC_AUTH_PASSWORD
+    let data = await fetch(process.env.API_URL + 'jsonapi/node/article', {
+      headers: new fetch.Headers({
+        "Authorization": `Basic ${new Buffer(`${login}:${password}`).toString('base64')}`
+      })
+    })
+    let json = await data.json()
+    let jobs = json.data.map(async (drupalNode) => {
+        if (!drupalNode.attributes.field_issue_comment_id) {
+          return
+        }
+        let issueId = drupalNode.attributes.field_issue_comment_id
+        let myData = {
+          drupalId: drupalNode.id,
+          issueId,
+          comments: []
+        }
+        let url = `https://api.github.com/repos/eiriksm/eiriksm.dev-comments/issues/${issueId}/comments`
+        let githubData = await fetch(url)
+        let githubJson = await githubData.json()
+        myData.comments = githubJson
+        let nodeMeta = {
+          id: createNodeId(`github-comments-${myData.drupalId}`),
+          parent: null,
+          mediaType: "application/json",
+          children: [],
+          internal: {
+            type: `github__comment`,
+            content: JSON.stringify(myData)
+          }
+        }
+        let node = Object.assign({}, myData, nodeMeta)
+        node.internal.contentDigest = createContentDigest(node)
+        createNode(node)
+      }
+    )
+    await Promise.all(jobs)
+  }
+  catch (err) {
+    throw err
+  }
 }
