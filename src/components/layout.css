@@ -85,6 +85,7 @@ article .img.player .text {
   padding: 2em;
   cursor: pointer;
 }
+.comment-wrapper ul,
 article.full ul {
   @apply .list-disc;
   padding-left: 2em;
