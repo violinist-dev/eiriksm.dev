@@ -113,7 +113,7 @@ export default class BlogPost extends React.Component {
     let img
     if (post.relationships.field_image && post.relationships.field_image.localFile) {
       img = (
-        <div className="img player"  onClick={this.handleImageClick.bind(this)}>
+        <div className="img player" onClick={this.handleImageClick.bind(this)}>
           <div className="text">Play</div>
         </div>
       )
@@ -137,8 +137,12 @@ export default class BlogPost extends React.Component {
           <h1 id="page-title">{ post.title }</h1>
           <small className="blog-date text-gray-700 py-1">{ blogFormat(new Date(post.created * 1000)) }</small>
           <div className="article-body" dangerouslySetInnerHTML={{ __html: post.body.value }}></div>
-          {img}
-          <Tags tags={post.relationships.field_tags}></Tags>
+          <div>
+            {img}
+          </div>
+          <div>
+            <Tags tags={post.relationships.field_tags}></Tags>
+          </div>
         </article>
         <Comments comments={comments} issueId={issueId} />
       </Layout>

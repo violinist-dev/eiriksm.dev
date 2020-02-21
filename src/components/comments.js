@@ -21,7 +21,7 @@ function Comments({ comments, issueId }) {
   })
   let commentCount = comments.length + ''
   let commentWord = 'comments'
-  if (commentCount === 1) {
+  if (commentCount === '1') {
     commentWord = 'comment'
   }
 
