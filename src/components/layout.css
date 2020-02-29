@@ -100,7 +100,7 @@ footer .eirik {
 }
 .social-links svg {
   display: inline-block;
-  max-width: 30px;
+  width: 30px;
 }
 .blog-pager {
   display: table;
