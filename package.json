@@ -25,6 +25,7 @@
     "gatsby-source-drupal": "^3.3.6",
     "gatsby-source-filesystem": "^2.1.36",
     "gatsby-transformer-sharp": "^2.3.3",
+    "node-emoji": "^1.10.0",
     "node-fetch": "^2.6.0",
     "postcss-loader": "^3.0.0",
     "precss": "^4.0.0",

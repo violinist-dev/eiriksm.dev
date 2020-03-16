@@ -1,5 +1,6 @@
 import React from "react"
 import blogFormat from '../date'
+const emoji = require('node-emoji')
 
 function Comments({ comments, issueId }) {
   comments = comments.filter(comment => {
@@ -10,6 +11,7 @@ function Comments({ comments, issueId }) {
     if (!comment.author.name) {
       comment.author.name = 'Anonymous'
     }
+    comment.message = emoji.emojify(comment.message)
     return (
       <div key={comment.commentId} className="eading-normal my-2 border-b-2">
         <p className="text-xs">{comment.author.name} <span className="mx-1 text-xs">&bull;</span> <span className="text-gray-600">{date}</span></p>
