@@ -67,7 +67,10 @@ article.full .blog-date {
   display: block;
 }
 article.full h2 {
-  margin-top: 42px;
+  margin-top: 1em;
+}
+article.full h3 {
+  @apply .font-bold;
 }
 article .img.player {
   background-color: theme('colors.teal.800');
