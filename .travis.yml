@@ -7,11 +7,16 @@ sudo: false
 addons:
   chrome: stable
 
+env:
+  - TRAVIS_NODE_VERSION="12"
+
 matrix:
   fast_finish: true
 
 before_script:
   - google-chrome --version
+  - rm -rf ~/.nvm && git clone https://github.com/creationix/nvm.git ~/.nvm && (cd ~/.nvm && git checkout `git describe --abbrev=0 --tags`) && source ~/.nvm/nvm.sh && nvm install $TRAVIS_NODE_VERSION
+  - node --version
   - /bin/bash scripts/travis.sh
 
 script:
