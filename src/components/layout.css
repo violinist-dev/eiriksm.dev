@@ -118,6 +118,11 @@ footer .eirik {
 .comment-wrapper pre {
   padding: 1em;
   background-color: theme("colors.gray.200");
+  position: relative;
+  overflow: auto;
+  background: #272822;
+  color: #f8f8f2;
+  @apply .mt-2 .mb-2;
 }
 @tailwind components;
 
