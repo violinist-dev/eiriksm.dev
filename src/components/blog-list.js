@@ -15,7 +15,32 @@ export default ({ data, pageContext }) => {
   const nextPage = "/blog/" + (currentPage + 1).toString()
 
   const list = posts.map(item => {
-    return <Teaser key={item.node.id} node={item.node}></Teaser>
+    var numComments = 0
+    data.allDisqusThread.edges.map((comment) => {
+      if (comment.node.threadId !==  item.node.id) {
+        return false
+      }
+      if (!comment.node.comments.length) {
+        return false
+      }
+      comment.node.comments.forEach(() => {
+        return numComments++
+      })
+      return true
+    })
+    data.allGithubComment.nodes.filter((comment) => {
+      if (comment.drupalId !==  item.node.drupal_id) {
+        return false
+      }
+      if (!comment.comments.length) {
+        return false
+      }
+      comment.comments.forEach(() => {
+        return numComments++
+      })
+      return true
+    })
+    return <Teaser numComments={numComments} key={item.node.id} node={item.node}></Teaser>
   })
   return (
     <Layout>
@@ -47,6 +72,7 @@ export const query = graphql`
       edges {
         node {
           title
+          drupal_id
           drupal_internal__nid
           id
           path {
@@ -68,6 +94,39 @@ export const query = graphql`
             }
           }
           created
+        }
+      }
+    }
+
+    allDisqusThread {
+      edges {
+        node {
+          id
+          comments {
+            author {
+              username
+              name
+            }
+            id
+            createdAt
+            message
+          }
+          threadId
+          link
+        }
+      }
+    }
+
+    allGithubComment {
+      nodes {
+        drupalId
+        comments {
+          body
+          id
+          created_at
+          user {
+            login
+          }
         }
       }
     }

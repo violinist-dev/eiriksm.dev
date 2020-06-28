@@ -3,7 +3,7 @@ import Tags from "./tags"
 import { Link } from "gatsby"
 import blogFormat from "../date"
 
-function Teaser({ node }) {
+function Teaser({ node, numComments }) {
   let pagePath = node.path.alias
   if (!pagePath) {
     pagePath = "/node/" + node.drupal_internal__nid
@@ -13,6 +13,10 @@ function Teaser({ node }) {
   if (typeof window !== `undefined`) {
     serverRendered = ""
   }
+  let numCommentsEl = ''
+  if (numComments) {
+    numCommentsEl = (<div className="counter"><span role="img" aria-label="comment-count">🗨️</span> {numComments}</div>)
+  }
   return (
     <article
       className="node node--view-mode-teaser pb-4 clearfix"
@@ -20,7 +24,7 @@ function Teaser({ node }) {
       typeof="schema:Article"
     >
       {serverRendered}
-      <div className="node__meta text-sm text-gray-700 py-1">{date}</div>
+      <div className="node__meta text-sm text-gray-700 py-1">{date} {numCommentsEl}</div>
       <h2 className="node__title ">
         <Link to={pagePath}>{node.title}</Link>
       </h2>

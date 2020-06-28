@@ -124,6 +124,9 @@ footer .eirik {
   color: #f8f8f2;
   @apply .mt-2 .mb-2;
 }
+.counter {
+  display: inline-block;
+}
 @tailwind components;
 
 @tailwind utilities;
