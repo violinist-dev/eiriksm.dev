@@ -124,8 +124,30 @@ footer .eirik {
   color: #f8f8f2;
   @apply .mt-2 .mb-2;
 }
+.speech-bubble {
+	position: relative;
+	background: theme("colors.gray.400");;
+	border-radius: .4em;
+}
+
+.speech-bubble:after {
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 50%;
+	width: 0;
+	height: 0;
+	border: 8px solid transparent;
+	border-right-color: theme("colors.gray.400");
+	border-left: 0;
+	margin-top: -8px;
+	margin-left: -8px;
+}
 .counter {
+  margin-bottom: 10px;
+  margin-left: 1em;
   display: inline-block;
+  padding: 0 2em;
 }
 @tailwind components;
 

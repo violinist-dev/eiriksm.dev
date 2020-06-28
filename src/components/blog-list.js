@@ -78,19 +78,11 @@ export const query = graphql`
           path {
             alias
           }
-          body {
-            value
-          }
           relationships {
             field_tags {
               name
               id
               drupal_internal__tid
-            }
-            field_image {
-              localFile {
-                publicURL
-              }
             }
           }
           created
