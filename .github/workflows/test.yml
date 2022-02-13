@@ -1,0 +1,71 @@
+name: Test
+on:
+  - push
+  - pull_request
+
+jobs:
+  test:
+    name: Run tests
+    runs-on: 'ubuntu-20.04'
+    services:
+      chromedriver:
+        image: nymediaas/chrome-headless:89
+        ports:
+          - 8643:8643
+    strategy:
+      fail-fast: false
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "7.4"
+
+      - name: Use Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: "14"
+
+      - name: Update composer
+        run: composer --verbose self-update
+
+      - name: Dump composer verson
+        run: composer --version
+
+      - name: Validate composer.json
+        run: composer --verbose validate
+
+      - name: Install dependencies
+        run: composer --verbose install
+
+      - name: Download the DISQUS xml
+        run: wget ${{ secrets.DISQUS_XML_URL }} -O disqus.xml
+
+      - name: Install node dependencies
+        run: npm i
+
+      - name: Build the site
+        run: npm run build
+        env:
+          ISSUE_BASE: http://172.17.0.1:9000/ci_issues/
+          BASIC_AUTH_USERNAME: ${{ secrets.BASIC_AUTH_USERNAME }}
+          BASIC_AUTH_PASSWORD: ${{ secrets.BASIC_AUTH_PASSWORD }}
+          API_URL: ${{ secrets.API_URL }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Start the serving of the site
+        run: ./node_modules/.bin/gatsby serve -H 0.0.0.0 &
+
+      - name: Make sure serving has started
+        run: ./vendor/bin/wait-for-listen 9000
+
+      - name: Debug
+        run: docker run --rm --entrypoint="" nymediaas/chrome-headless:89 ifconfig
+
+      - name: Make a directory we need
+        run: mkdir -p public/ci_issues
+
+      - name: Run tests
+        run: composer test
