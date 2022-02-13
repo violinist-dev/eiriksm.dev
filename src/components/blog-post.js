@@ -191,8 +191,7 @@ export default class BlogPost extends React.Component {
     });
     return (
       <Layout>
-        <script type="application/ld+json">
-          {structuredData}
+        <script type="application/ld+json" dangerouslySetInnerHTML={{__html: structuredData}} >
         </script>
         <article className="full">
           <SEO title={post.title} />

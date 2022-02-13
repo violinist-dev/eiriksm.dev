@@ -1,6 +1,6 @@
 {
   "name": "eiriksm.dev",
-  "description": "A simple starter to get up and developing quickly with Gatsby",
+  "description": "The website for eiriksm.dev",
   "version": "0.0.0",
   "author": "Eirik S. Morland <eirik@morland,no>",
   "dependencies": {
@@ -50,6 +50,7 @@
     "develop": "gatsby develop",
     "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
     "start": "npm run develop",
+    "dev": "npm run develop",
     "deploy": "./node_modules/.bin/gatsby-plugin-s3 deploy --yes",
     "serve": "gatsby serve",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1",
